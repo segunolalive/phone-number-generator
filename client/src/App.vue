@@ -2,7 +2,7 @@
   <section class="vertical">
     <h1>Phone Number Generator</h1>
     <transition name="slide-in" mode="out-in">
-      <div class="message" v-if="message">{{ message }}</div>
+      <div :class="messageClass" v-if="message">{{ message }}</div>
     </transition>
     <form @submit.prevent="generateNumbers" class="vertical">
       <label for="total">Enter total number of phone numbers to be generated</label>
@@ -32,7 +32,12 @@ const API = "http://localhost:3000/api/v1/phone-numbers";
 export default {
   name: "app",
   data() {
-    return { input: { total: "", error: "" }, downloadLink: "", message: "" };
+    return {
+      input: { total: "", error: "" },
+      downloadLink: "",
+      message: "",
+      error: false
+    };
   },
   methods: {
     generateNumbers() {
@@ -43,12 +48,14 @@ export default {
           this.message = data.message;
           this.input.total = "";
           this.input.error = "";
+          this.error = false;
         })
         .catch(error => {
-          if (error.status < 500) {
+          if (error.response.status < 500) {
             this.input.error = error.response.data.error.message;
           } else {
             this.message = error.response.data.error.message;
+            this.error = true;
           }
         });
     },
@@ -56,6 +63,9 @@ export default {
       this.message = "";
       this.input.error = "";
       this.downloadLink = "";
+    },
+    messageClass() {
+      return this.error ? "message error" : "message error-message";
     }
   }
 };
@@ -139,6 +149,10 @@ input:focus {
   color: #182413;
   font-weight: bold;
   padding: 2rem;
+}
+
+.error-message {
+  background-color: red;
 }
 
 a {
