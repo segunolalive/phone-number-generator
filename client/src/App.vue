@@ -2,7 +2,7 @@
   <section class="vertical">
     <h1>Phone Number Generator</h1>
     <transition name="slide-in" mode="out-in">
-      <div :class="messageClass" v-if="message">{{ message }}</div>
+      <div :class="messageClass()" v-if="message">{{ message }}</div>
     </transition>
     <form @submit.prevent="generateNumbers" class="vertical">
       <label for="total">Enter total number of phone numbers to be generated</label>
@@ -65,7 +65,7 @@ export default {
       this.downloadLink = "";
     },
     messageClass() {
-      return this.error ? "message error" : "message error-message";
+      return this.error ? "message error-message" : "message";
     }
   }
 };

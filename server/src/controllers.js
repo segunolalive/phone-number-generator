@@ -5,7 +5,7 @@ const fs = require('fs');
 const writeFile = util.promisify(fs.writeFile);
 const readdir = util.promisify(fs.readdir);
 
-const DATABASE = path.join(__dirname, 'database');
+const DATABASE = path.join(path.dirname(__dirname), 'database');
 
 exports.generateNumbers = async (req, res, next) => {
   const [MIN, MAX] = [100000000, 999999999];
