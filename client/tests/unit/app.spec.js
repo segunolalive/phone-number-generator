@@ -1,7 +1,6 @@
 import { mount } from "@vue/test-utils";
 import App, { API } from "@/App";
 import mockAxios from "../../__mocks__/axios";
-// import mockAxios from "axios";
 
 describe("App", () => {
   let wrapper;
@@ -56,7 +55,6 @@ describe("App", () => {
     );
     wrapper.find("form").trigger("submit");
     wrapper.vm.$nextTick(() => {
-      // expect(wrapper.vm.message).toBe("failure");
       done();
     });
   });
