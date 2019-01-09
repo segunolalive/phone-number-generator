@@ -28,7 +28,7 @@
 
 <script>
 import axios from "axios";
-const API = "http://localhost:3000/api/v1/phone-numbers";
+export const API = "http://localhost:3000/api/v1/phone-numbers";
 export default {
   name: "app",
   data() {
@@ -55,6 +55,11 @@ export default {
             this.input.error = error.response.data.error.message;
           } else {
             this.message = error.response.data.error.message;
+            console.log(
+              "-------------\n",
+              error.response.data.error.message,
+              "\n================"
+            );
             this.error = true;
           }
         });
